@@ -40,7 +40,6 @@ NOT:
 
 - https://www.theinternetcompany.one/
 - https://www.aboutluca.com/
-- https://www.vivekjadhav.xyz/
 - https://www.intencv.com/
 
 ---
