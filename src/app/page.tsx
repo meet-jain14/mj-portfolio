@@ -16,23 +16,24 @@ export default function Home() {
                 AI ENGINEER • FULL STACK DEVELOPER
               </p>
 
-              <h1 className="max-w-4xl text-6xl font-bold leading-tight md:text-8xl">
-                Building immersive digital experiences.
+              <h1 className="max-w-5xl text-5xl font-bold leading-[0.95] tracking-[-0.04em] md:text-8xl">
+                Crafting intelligent interfaces
+                for the next generation of the web.
               </h1>
 
               <p className="mt-6 max-w-2xl text-lg text-gray-400">
-                MERN Stack Developer focused on interactive products,
-                AI-powered systems, and cinematic web experiences.
+                Building immersive AI-powered products, cinematic interfaces,
+                and high-performance full stack experiences with modern web technologies.
               </p>
-              <div className="mt-10 flex gap-6">
+              <div className="mt-12 flex flex-wrap gap-5">
                 <MagneticButton strength={0.2}>
-                  <button className="rounded-full border border-[#00ffae]/20 bg-[#00ffae]/10 px-8 py-4 text-sm font-medium tracking-wide text-[#00ffae] backdrop-blur-md transition-colors duration-300 hover:bg-[#00ffae]/20">
+                  <button className="rounded-full border border-[#00ffae]/20 bg-[#00ffae]/12 px-8 py-4 text-sm font-medium tracking-wide text-[#00ffae] backdrop-blur-md transition-colors duration-300 hover:bg-[#00ffae]/25 shadow-[0_0_30px_rgba(0,255,174,0.03)]">
                     View Projects
                   </button>
                 </MagneticButton>
 
                 <MagneticButton strength={0.2}>
-                  <button className="rounded-full border border-white/10 bg-white/5 px-8 py-4 text-sm font-medium tracking-wide text-white transition-colors duration-300 hover:bg-white/10">
+                  <button className="rounded-full border border-white/10 bg-white/[0.03] px-8 py-4 text-sm font-medium tracking-wide text-white transition-colors duration-300 hover:bg-white/[0.07] shadow-[0_0_30px_rgba(0,255,174,0.03)]">
                     Download Resume
                   </button>
                 </MagneticButton>

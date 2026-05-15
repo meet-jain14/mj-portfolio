@@ -36,9 +36,20 @@ const EMERALD = {
   faint:  "rgba(52, 211, 153, 0.06)",
 };
 
-const SPRING_CORE   = { stiffness: 620, damping: 38, mass: 0.5 };
-const SPRING_RING   = { stiffness: 180, damping: 26, mass: 0.8 };
-const SPRING_TRAIL  = { stiffness: 90,  damping: 22, mass: 1.2 };
+// Position-tracking springs — unchanged, these control physical following feel
+const SPRING_CORE   = { stiffness: 680, damping: 42,  mass: 0.45 };
+const SPRING_RING   = { stiffness: 160, damping: 24,  mass: 0.9  };
+const SPRING_TRAIL  = { stiffness: 72,  damping: 20,  mass: 1.35 };
+
+// Morphing springs — govern how scale/opacity transitions between variants.
+// Deliberately under-damped so the ring breathes in with a tiny overshoot
+// before settling, which reads as intentional rather than reactive.
+const MORPH_DOT   = { type: "spring" as const, stiffness: 260, damping: 22, mass: 0.6  };
+const MORPH_RING  = { type: "spring" as const, stiffness: 140, damping: 18, mass: 1.0  };
+const MORPH_TRAIL = { type: "spring" as const, stiffness: 90,  damping: 16, mass: 1.3  };
+
+// Opacity uses a gentler tween so it doesn't race ahead of the scale spring
+const FADE = { duration: 0.38, ease: [0.25, 0.1, 0.25, 1] as [number,number,number,number] };
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Cursor Renderer
@@ -79,16 +90,23 @@ function CursorRenderer() {
     gsapTweenRef.current?.kill();
 
     if (variant === "hover" || variant === "magnetic") {
-      gsapTweenRef.current = gsap.to(pulseRef.current, {
-        scale: 1.55,
-        opacity: 0,
-        duration: 0.9,
-        ease: "power2.out",
-        repeat: -1,
-        repeatDelay: 0.15,
-      });
+      // Delayed start so the ring spring settles first — pulse only begins
+      // once the cursor has "arrived", making it feel earned not immediate.
+      gsapTweenRef.current = gsap.fromTo(
+        pulseRef.current,
+        { scale: 1, opacity: 0.5 },
+        {
+          scale: 1.7,
+          opacity: 0,
+          duration: 1.1,
+          ease: "power1.out",
+          repeat: -1,
+          repeatDelay: 0.3,
+          delay: 0.18,
+        }
+      );
     } else {
-      gsap.set(pulseRef.current, { scale: 1, opacity: 0 });
+      gsap.to(pulseRef.current, { scale: 1, opacity: 0, duration: 0.2, ease: "power2.in" });
     }
 
     return () => { gsapTweenRef.current?.kill(); };
@@ -105,38 +123,38 @@ function CursorRenderer() {
   }, [variant]);
 
   // ── Derived visual states ─────────────────────────────────────────────────
+  // Scale values are intentionally conservative — the spring overshoot
+  // provides the extra sense of expansion without requiring large targets.
   const coreDot = {
-    default:  { scale: 1,    opacity: 1    },
-    hover:    { scale: 1.4,  opacity: 1    },
-    click:    { scale: 0.7,  opacity: 1    },
-    magnetic: { scale: 1.6,  opacity: 0.9  },
-    text:     { scale: 0.35, opacity: 0.7  },
-    hidden:   { scale: 0,    opacity: 0    },
+    default:  { scale: 1,    opacity: 1   },
+    hover:    { scale: 1.25, opacity: 1   },  // was 1.4 — subtle, intentional
+    click:    { scale: 0.65, opacity: 1   },
+    magnetic: { scale: 1.35, opacity: 0.9 },
+    text:     { scale: 0.3,  opacity: 0.6 },
+    hidden:   { scale: 0,    opacity: 0   },
   };
 
   const ringState = {
-    default:  { scale: 1,    opacity: 0.55, borderWidth: 1   },
-    hover:    { scale: 1.6,  opacity: 0.85, borderWidth: 1.5 },
-    click:    { scale: 0.85, opacity: 0.95, borderWidth: 2   },
-    magnetic: { scale: 2,    opacity: 0.5,  borderWidth: 1   },
-    text:     { scale: 2.8,  opacity: 0.35, borderWidth: 1   },
+    default:  { scale: 1,    opacity: 0.5,  borderWidth: 1   },
+    hover:    { scale: 1.45, opacity: 0.75, borderWidth: 1.5 }, // was 1.6 — no abrupt jump
+    click:    { scale: 0.8,  opacity: 0.9,  borderWidth: 2   },
+    magnetic: { scale: 1.75, opacity: 0.45, borderWidth: 1   }, // was 2 — more restrained
+    text:     { scale: 2.4,  opacity: 0.3,  borderWidth: 1   },
     hidden:   { scale: 0,    opacity: 0,    borderWidth: 1   },
   };
 
   const trailState = {
-    default:  { scale: 1,   opacity: 0.18 },
-    hover:    { scale: 1.4, opacity: 0.28 },
-    click:    { scale: 0.8, opacity: 0.35 },
-    magnetic: { scale: 1.8, opacity: 0.22 },
-    text:     { scale: 2,   opacity: 0.1  },
-    hidden:   { scale: 0,   opacity: 0    },
+    default:  { scale: 1,    opacity: 0.16 },
+    hover:    { scale: 1.25, opacity: 0.24 },
+    click:    { scale: 0.75, opacity: 0.32 },
+    magnetic: { scale: 1.5,  opacity: 0.2  },
+    text:     { scale: 1.7,  opacity: 0.08 },
+    hidden:   { scale: 0,    opacity: 0    },
   };
 
   const cd = coreDot[variant];
   const rs = ringState[variant];
   const ts = trailState[variant];
-
-  const transition = { type: "spring", stiffness: 380, damping: 28 };
 
   return (
     <AnimatePresence>
@@ -163,7 +181,10 @@ function CursorRenderer() {
               willChange:   "transform",
             }}
             animate={{ scale: ts.scale, opacity: ts.opacity }}
-            transition={transition}
+            transition={{
+              scale:   MORPH_TRAIL,
+              opacity: FADE,
+            }}
           />
 
           {/* ── Outer ring ──────────────────────────────────────────────── */}
@@ -191,7 +212,11 @@ function CursorRenderer() {
               opacity:      rs.opacity,
               borderWidth:  rs.borderWidth,
             }}
-            transition={transition}
+            transition={{
+              scale:       MORPH_RING,
+              opacity:     FADE,
+              borderWidth: FADE,
+            }}
           />
 
           {/* ── Energy pulse ring (GSAP-driven) ─────────────────────────── */}
@@ -238,7 +263,10 @@ function CursorRenderer() {
               willChange:   "transform",
             }}
             animate={{ scale: cd.scale, opacity: cd.opacity }}
-            transition={transition}
+            transition={{
+              scale:   MORPH_DOT,
+              opacity: FADE,
+            }}
           />
         </>
       )}
