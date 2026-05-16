@@ -1,36 +1,148 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MJ Portfolio
 
-## Getting Started
+A cinematic interactive portfolio experience built with Next.js, TypeScript, Framer Motion, GSAP, and modern frontend architecture.
 
-First, run the development server:
+Designed to feel less like a traditional portfolio and more like a premium digital product experience.
+
+---
+
+## Vision
+
+This project is focused on creating:
+
+- immersive interaction design
+- cinematic UI composition
+- intelligent frontend experiences
+- luxury-tech atmosphere
+- high-performance animations
+- product-level visual polish
+
+The portfolio is intentionally designed to avoid:
+- generic templates
+- dashboard-style layouts
+- excessive visual clutter
+- overused neon cyberpunk aesthetics
+
+---
+
+## Tech Stack
+
+### Frontend
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- GSAP
+- Lenis
+
+### Planned / Experimental
+- Three.js
+- React Three Fiber
+- Interactive project storytelling systems
+
+---
+
+## Current Features
+
+- Premium cinematic hero section
+- Custom energy cursor system
+- Magnetic interaction buttons
+- Atmospheric glow system
+- Smooth scrolling experience
+- Luxury glassmorphism navbar
+- Reusable section architecture
+- Premium project showcase foundation
+- Editorial spacing and typography rhythm
+- Custom scrollbar styling
+
+---
+
+## Design Philosophy
+
+The experience prioritizes:
+
+- restraint over visual chaos
+- atmosphere over excessive effects
+- smooth interaction choreography
+- intentional motion design
+- premium spacing and typography
+- immersive yet minimal UI
+
+Every interaction is designed to feel:
+- intelligent
+- responsive
+- cinematic
+- handcrafted
+
+---
+
+## Project Structure
+
+```txt
+src/
+ ├── app/
+ ├── animations/
+ ├── components/
+ ├── data/
+ ├── hooks/
+ ├── lib/
+ ├── sections/
+ ├── store/
+ ├── styles/
+ ├── types/
+ └── utils/
+```
+
+---
+
+## Local Development
+
+Clone the repository:
+
+```bash
+git clone <https://github.com/meet-jain14/mj-portfolio.git>
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Status
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Currently under active development.
 
-## Learn More
+Upcoming systems include:
+- interactive project storytelling
+- cinematic hover choreography
+- live project previews
+- command palette
+- advanced section transitions
+- AI-inspired atmospheric systems
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Inspiration
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Inspired by modern immersive web experiences and premium interactive design systems.
 
-## Deploy on Vercel
+Key inspirations:
+- The Internet Company
+- About Luca
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Author
+
+MJ  
+AI Engineer • Full Stack Developer
