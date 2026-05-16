@@ -19,7 +19,7 @@ type Props = {
           border
           border-white/10
           bg-white/[0.03]
-          p-10
+          p-8 md:p-10
           transition-all
           duration-700
           hover:border-[#00ffae]/20

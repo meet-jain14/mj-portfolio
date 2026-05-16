@@ -20,7 +20,7 @@ export default function Home() {
       <Navbar />
       <div className="relative z-10">
         <Container>
-          <section className="flex min-h-screen items-center pt-24">
+          <section className="flex min-h-[90vh] items-center pt-24">
             <div>
               <p className="mb-4 text-sm uppercase tracking-[0.3em] text-[#00ffae]">
                 AI ENGINEER • FULL STACK DEVELOPER
@@ -55,7 +55,7 @@ export default function Home() {
                 subtitle="FEATURED WORK"
                 title="Selected projects built with interaction, performance, and intelligent systems in mind."
               >
-                <div className="grid gap-8">
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
                 <ProjectCard
                   category="AI PLATFORM"
                   title="Cinematic AI Product Experience"
