@@ -2,11 +2,21 @@ import Container from "../components/Container";
 import Navbar from "../components/Navbar";
 import MagneticButton from "../components/MagneticButton";
 import AmbientGlow from "../components/AmbientGlow";
+import NeuralBackground from "../components/NeuralBackground";
+import Section from "../components/Section";
+import ProjectCard from "../components/ProjectCard";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       <AmbientGlow />
+      {/* <NeuralBackground
+        nodeCount={34}
+        globalOpacity={0.38}
+        connectionDistance={170}
+        speed={0.75}
+      /> */}
+
       <Navbar />
       <div className="relative z-10">
         <Container>
@@ -38,9 +48,21 @@ export default function Home() {
                   </button>
                 </MagneticButton>
               </div>
-              <div className="h-[200vh]" />
             </div>
           </section>
+              <Section
+                id="projects"
+                subtitle="FEATURED WORK"
+                title="Selected projects built with interaction, performance, and intelligent systems in mind."
+              >
+                <div className="grid gap-8">
+                <ProjectCard
+                  category="AI PLATFORM"
+                  title="Cinematic AI Product Experience"
+                  description="Interactive AI-powered platform focused on immersive UI, intelligent workflows, and premium user experience."
+                />
+                </div>
+              </Section>
         </Container>
       </div>  
     </main>
