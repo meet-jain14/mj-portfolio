@@ -1,3 +1,7 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 type Props = {
     id?: string;
     title?: string;
@@ -12,8 +16,12 @@ type Props = {
     children,
   }: Props) {
     return (
-      <section
+      <motion.section
         id={id}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         className="relative py-32 md:py-40"
       >
         <div className="mb-16">
@@ -31,6 +39,6 @@ type Props = {
         </div>
   
         {children}
-      </section>
+      </motion.section>
     );
   }
