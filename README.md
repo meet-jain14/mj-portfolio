@@ -104,7 +104,7 @@ src/
 Clone the repository:
 
 ```bash
-git clone <https://github.com/meet-jain14/mj-portfolio.git>
+git clone https://github.com/meet-jain14/mj-portfolio.git
 ```
 
 Install dependencies:
