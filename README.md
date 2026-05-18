@@ -58,6 +58,10 @@ The portfolio is intentionally designed to avoid:
 - Cinematic hover choreography
 - Ambient preview interaction system
 - Centralized project data management
+- Expandable cinematic project showcase
+- Coordinated project interaction system
+- Focus-directed storytelling experience
+- Advanced motion choreography
 
 ---
 
@@ -148,5 +152,5 @@ Key inspirations:
 
 ## Author
 
-MJ  
+Meet Jain  
 AI Engineer • Full Stack Developer

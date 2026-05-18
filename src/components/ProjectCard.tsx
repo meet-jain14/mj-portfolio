@@ -1,3 +1,7 @@
+"use client";
+// import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
 type Props = {
   category: string;
   title: string;
@@ -5,8 +9,10 @@ type Props = {
   stack: string[];
   accent?: string;
   preview?: string;
+  expanded: boolean;
+  onToggle: () => void;
+  inactive?: boolean;
 };
-
 export default function ProjectCard({
   category,
   title,
@@ -14,10 +20,16 @@ export default function ProjectCard({
   stack,
   preview,
   accent = "#00ffae",
+  expanded,
+  onToggle,
+  inactive = false,
 }: Props) {
+  // const [expanded, setExpanded] = useState(false);
   return (
-    <div
-      className="
+    <motion.div
+      layout
+      onClick={onToggle}
+      className={`
         group
         relative
         overflow-hidden
@@ -30,9 +42,16 @@ export default function ProjectCard({
         backdrop-blur-xl
         transition-all
         duration-700
-        hover:border-white/20
         hover:bg-white/[0.05]
-        hover:scale-[1.01]"
+        hover:scale-[1.01]
+        transition-opacity
+        duration-500
+        ${
+          inactive 
+            ? "opacity-40 scale-[0.98]"
+            : "opacity-100 scale-100"
+          }
+      `}
     >
 
       {/* Ambient glow */}
@@ -230,6 +249,81 @@ export default function ProjectCard({
           </div>
         </div>
       </div>
-    </div>
+      <AnimatePresence>
+        {expanded && (
+          <motion.div
+          initial={{
+            opacity: 0,
+            height: 0,
+            y: 20,
+          }}
+          animate={{
+            opacity: 1,
+            height: "auto",
+            y: 0,
+          }}
+          exit={{
+            opacity: 0,
+            height: 0,
+            y: 10,
+          }}
+          transition={{
+            duration: 0.7,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="
+            relative
+            z-10
+            mt-10
+            overflow-hidden
+            border-t
+            border-white/10
+            pt-10
+          "
+          >
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: {
+                    staggerChildren: 0.12,
+                  },
+                },
+              }}
+              className="grid gap-8 lg:grid-cols-2"
+            >
+              
+              <motion.div>
+                <p className="text-sm uppercase tracking-[0.3em] text-white/40">
+                  PROJECT OVERVIEW
+                </p>
+
+                <p className="mt-6 leading-relaxed text-gray-400">
+                  This project focuses on creating immersive AI-powered
+                  interfaces with cinematic interactions, intelligent
+                  workflows, and premium frontend engineering principles.
+                </p>
+              </motion.div>
+
+              <motion.div>
+                <p className="text-sm uppercase tracking-[0.3em] text-white/40">
+                  KEY HIGHLIGHTS
+                </p>
+
+                <ul className="mt-6 space-y-4 text-gray-400">
+                  <li>• Cinematic interaction system</li>
+                  <li>• AI-focused experience architecture</li>
+                  <li>• Premium motion choreography</li>
+                  <li>• Scalable frontend structure</li>
+                </ul>
+              </motion.div>
+
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 }

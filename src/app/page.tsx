@@ -1,3 +1,5 @@
+"use client";
+
 import Container from "../components/Container";
 import Navbar from "../components/Navbar";
 import MagneticButton from "../components/MagneticButton";
@@ -5,8 +7,10 @@ import AmbientGlow from "../components/AmbientGlow";
 import Section from "../components/Section";
 import ProjectCard from "../components/ProjectCard";
 import { projects } from "../data/projects";
+import { useState } from "react";
 
 export default function Home() {
+  const [activeProject, setActiveProject] = useState<string | null>(null);
   return (
     <main className="min-h-screen">
       <AmbientGlow />
@@ -56,16 +60,30 @@ export default function Home() {
             title="Selected projects built with interaction, performance, and intelligent systems in mind."
           >
             <div className="grid grid-cols-1 gap-8 xl:grid-cols-2">
-            {projects.map((project) => (
-              <ProjectCard
-                key={project.title}
-                category={project.category}
-                title={project.title}
-                description={project.description}
-                stack={project.stack}
-                accent={project.accent}
-              />
-            ))}
+            {projects.map((project) => {
+              const isExpanded = activeProject === project.title;
+              const hasActiveProject = activeProject !== null;
+              const isInactive =
+                hasActiveProject && !isExpanded;
+
+              return (
+                <ProjectCard
+                  key={project.title}
+                  category={project.category}
+                  title={project.title}
+                  description={project.description}
+                  stack={project.stack}
+                  accent={project.accent}
+                  expanded={isExpanded}
+                  onToggle={() =>
+                    setActiveProject(
+                      isExpanded ? null : project.title
+                    )
+                  }
+                  inactive={isInactive}
+                />
+              );
+            })}
             </div>
           </Section>
 

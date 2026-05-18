@@ -138,6 +138,11 @@ src/
 - Cinematic project preview panels
 - Ambient preview motion layers
 - Section reveal choreography
+- Expandable cinematic project storytelling
+- Centralized active project orchestration
+- Focus isolation interaction system
+- Advanced reveal choreography
+- Premium attention-direction UX
 
 ## Foundation Systems
 
