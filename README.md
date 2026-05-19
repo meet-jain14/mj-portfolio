@@ -62,6 +62,11 @@ The portfolio is intentionally designed to avoid:
 - Coordinated project interaction system
 - Focus-directed storytelling experience
 - Advanced motion choreography
+- Editorial stacked project storytelling layout
+- Independent cinematic project expansion system
+- Smooth layout transition choreography
+- Premium focus-isolation interactions
+- Refined immersive hover behavior
 
 ---
 

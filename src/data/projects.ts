@@ -13,6 +13,11 @@ export const projects = [
       ],
   
       accent: "#00ffae",
+
+      github: "#",
+      live: "#",
+      year: "2025",
+      status: "In Development",
     },
   
     {
@@ -29,5 +34,10 @@ export const projects = [
       ],
   
       accent: "#6ee7ff",
+
+      github: "#",
+      live: "#",
+      year: "2025",
+      status: "In Development",
     },
   ];

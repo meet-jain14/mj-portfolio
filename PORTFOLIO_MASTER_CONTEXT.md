@@ -143,6 +143,12 @@ src/
 - Focus isolation interaction system
 - Advanced reveal choreography
 - Premium attention-direction UX
+- Vertical cinematic project storytelling layout
+- Independent project expansion orchestration
+- Layout transition choreography
+- Refined interaction density system
+- Smooth cinematic hover-settling behavior
+- Editorial stacked showcase architecture
 
 ## Foundation Systems
 

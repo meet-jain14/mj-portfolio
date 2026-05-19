@@ -12,6 +12,10 @@ type Props = {
   expanded: boolean;
   onToggle: () => void;
   inactive?: boolean;
+  github: string;
+  live: string;
+  year: string;
+  status: string;
 };
 export default function ProjectCard({
   category,
@@ -23,12 +27,36 @@ export default function ProjectCard({
   expanded,
   onToggle,
   inactive = false,
+  github,
+  live,
+  year,
+  status,
 }: Props) {
   // const [expanded, setExpanded] = useState(false);
   return (
     <motion.div
       layout
-      onClick={onToggle}
+      transition={{
+        layout: {
+          duration: 0.7,
+          ease: [0.22, 1, 0.36, 1],
+        },
+      }}
+      onClick={() => {
+        onToggle();
+      
+        setTimeout(() => {
+          window.scrollBy({
+            top: 120,
+            behavior: "smooth",
+          });
+        }, 250);
+      }}
+      animate={{
+        backgroundColor: expanded
+          ? "rgba(255,255,255,0.05)"
+          : "rgba(255,255,255,0.03)",
+      }}
       className={`
         group
         relative
@@ -37,8 +65,8 @@ export default function ProjectCard({
         border
         border-white/10
         bg-white/[0.03]
-        p-8
-        md:p-10
+        p-6
+        md:p-7
         backdrop-blur-xl
         transition-all
         duration-700
@@ -59,11 +87,12 @@ export default function ProjectCard({
         className="
             absolute
             inset-0
-            opacity-0
             transition-opacity
             duration-700
-            group-hover:opacity-100
           "
+        style={{
+          opacity: expanded ? 1 : 0,
+        }}  
       >
         {/* Left glow */}
         <div
@@ -115,7 +144,7 @@ export default function ProjectCard({
             {category}
           </p>
 
-          <h3 className="mt-6 text-3xl font-bold leading-tight tracking-[-0.03em]">
+          <h3 className="mt-6 text-2xl md:text-3xl font-bold leading-tight tracking-[-0.03em]">
             {title}
           </h3>
 
@@ -162,7 +191,7 @@ export default function ProjectCard({
             relative
             hidden
             h-full
-            min-h-[280px]
+            min-h-[220px]
             overflow-hidden
             rounded-[28px]
             border
@@ -296,6 +325,16 @@ export default function ProjectCard({
             >
               
               <motion.div>
+              <div className="mb-8 flex flex-wrap gap-4">
+                <div className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs uppercase tracking-[0.2em] text-gray-300">
+                  {year}
+                </div>
+
+                <div className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs uppercase tracking-[0.2em] text-gray-300">
+                  {status}
+                </div>
+              </div>
+
                 <p className="text-sm uppercase tracking-[0.3em] text-white/40">
                   PROJECT OVERVIEW
                 </p>
@@ -321,6 +360,68 @@ export default function ProjectCard({
               </motion.div>
 
             </motion.div>
+            <div className="mt-12 flex flex-wrap gap-5">
+              <a
+                href={live}
+                target="_blank"
+                className="
+                  group/button
+                  rounded-full
+                  border
+                  border-white/10
+                  bg-white/[0.03]
+                  px-6
+                  py-3
+                  text-sm
+                  tracking-wide
+                  text-white
+                  transition-all
+                  duration-500
+                  hover:-translate-y-1
+                  hover:border-white/20
+                  hover:bg-white/[0.06]
+                "
+              >
+                <span className="flex items-center gap-2">
+                  <span>Live Experience</span>
+
+                  <span className="transition-transform duration-500 group-hover/button:translate-x-1">
+                    →
+                  </span>
+                </span>
+              </a>
+
+              <a
+                href={github}
+                target="_blank"
+                className="
+                  group/source
+                  rounded-full
+                  border
+                  border-[#00ffae]/20
+                  bg-[#00ffae]/10
+                  px-6
+                  py-3
+                  text-sm
+                  tracking-wide
+                  text-[#00ffae]
+                  transition-all
+                  duration-500
+                  hover:-translate-y-1
+                  hover:bg-[#00ffae]/20
+                  hover:shadow-[0_0_30px_rgba(0,255,174,0.12)]
+                "
+              >
+                <span className="flex items-center gap-2">
+                  <span>View Source</span>
+
+                  <span className="transition-transform duration-500 group-hover/source:translate-x-1">
+                    ↗
+                  </span>
+                </span>
+              </a>
+
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

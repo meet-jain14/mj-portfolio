@@ -59,7 +59,7 @@ export default function Home() {
             subtitle="FEATURED WORK"
             title="Selected projects built with interaction, performance, and intelligent systems in mind."
           >
-            <div className="grid grid-cols-1 gap-8 xl:grid-cols-2">
+            <div className="flex flex-col gap-8">
             {projects.map((project) => {
               const isExpanded = activeProject === project.title;
               const hasActiveProject = activeProject !== null;
@@ -81,6 +81,10 @@ export default function Home() {
                     )
                   }
                   inactive={isInactive}
+                  github={project.github}
+                  live={project.live}
+                  year={project.year}
+                  status={project.status}
                 />
               );
             })}
